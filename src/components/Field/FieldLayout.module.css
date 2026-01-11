@@ -13,3 +13,8 @@
 	margin: 5px;
 	border-radius: 10px;
 }
+
+.fieldItem:hover {
+	background-color: #d3d3d3;
+	cursor: pointer;
+}

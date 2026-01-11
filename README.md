@@ -1,70 +1,29 @@
-# Getting Started with Create React App
+Реализовать игру «Крестики-Нолики»:
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+игровое поле — 3х3 клетки;
+над полем информация — чей текущий ход (крестика или нолика) / информация о победе одной из сторон или ничья;
+при клике на клетку в ней должен отрисовываться символ стороны, у которой был текущий ход (крестик или нолик);
+если 3 одинаковых символа размещается в одну линию (горизонтально, вертикально или по диагонали), то остановить игру и сообщить о победе крестика или нолика;
+реализовать кнопку «Начать заново», при клике на которую поле будет очищаться и игра начнётся сначала;
+дизайн на усмотрение разработчика.
+План реализации:
 
-## Available Scripts
+Подготовьте стартовый React-проект. В качестве стартового проекта используйте шаблон приложения, который мы подготовили в первом уроке (с настроенными ESLint, Prettier и EditorConfig).
 
-In the project directory, you can run:
+Строгий режим. Убедитесь, что корневой компонент обернут в StrictMode.
 
-### `npm start`
+Подготовьте компоненты. В проекте создайте следующие компоненты (пока пустые):
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+Field — будет игровым полем с клетками, где каждая клетка представляет из себя кнопку. При нажатии на определенную клетку будет происходить ход одной из сторон;
+Information — будет выводить, чей на данный момент ход (крестика или нолика), либо информацию о победе одной из сторон;
+Game (или App) — корневой компонент. Будет выводить компоненты Information, Field, а также кнопку «Начать заново».
+Каждый из этих компонентов является stateful-контейнером, который внутри содержит stateless-шаблон. То есть компонент Field (или их можно называть по типу FieldContainer) является компонентом-контейнером, который внутри выводит компонент-шаблон FieldLayout. Аналогично Information выводит InformationLayout, Game выводит GameLayout.
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+Создайте компоненты-шаблоны, соедините все компоненты друг с другом и выведите их в соответствии с иерархией:
 
-### `npm test`
-
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
-
-### `npm run build`
-
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
-
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
-
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `npm run eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
-
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
-
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+└── Game
+└── GameLayout
+├── Information
+│ └── InformationLayout
+└── Field
+└── FieldLayout

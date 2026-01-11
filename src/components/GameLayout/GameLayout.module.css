@@ -1,0 +1,25 @@
+.gameContainer {
+	background-color: #363636;
+	text-align: center;
+	height: 100vh;
+	margin: 0 auto;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+}
+.gameTitle {
+	border-radius: 10px;
+	background-color: #fff;
+	padding: 10px 20px;
+}
+
+.gameRestartBtn {
+	margin-top: 20px;
+	padding: 10px 20px;
+	font-size: 24px;
+	font-weight: 700;
+	cursor: pointer;
+	border-radius: 10px;
+	background-color: #fff;
+	width: 20%;
+}

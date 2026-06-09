@@ -23,14 +23,16 @@ export function Game() {
 
 	const stepInGame = (i) => {
 		if (field[i] !== '' || isGameEnded || isDraw) return;
+		const newField = [...field.slice(0, i), currentPlayer, ...field.slice(i + 1)];
+		if (checkWin(newField, currentPlayer)) {
+			dispatch({ type: 'SET_IS_GAME_ENDED', payload: true });
+			return;
+		}
 		dispatch({
 			type: 'STEP_IN_GAME',
-			payload: [...field.slice(0, i), currentPlayer, ...field.slice(i + 1)],
+			payload: newField,
 		});
 
-		if (checkWin(field, currentPlayer)) {
-			console.log('Победитель:', currentPlayer);
-		}
 		// 	dispatch({ type: 'SET_IS_GAME_ENDED', payload: { isGameEnded: true } });
 		// 	dispatch({ type: 'SET_FIELD', payload: { field: [...newField] } });
 		// 	return;

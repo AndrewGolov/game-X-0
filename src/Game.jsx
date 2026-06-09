@@ -1,28 +1,35 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { GameLayout } from './components/GameLayout/GameLayout';
 import { createField } from './components/utils/createField';
-import { WIN_PATTERNS } from './components/constants/WIN_PATTERNS';
+import { store } from './components/store';
+import { checkWin } from './components/utils/checkWin';
 
 export function Game() {
-	const [currentPlayer, setCurrentPlayer] = useState('X');
+	const [, forceUpdate] = useState({});
+
+	// Временная логика которая убереться
 	const [isGameEnded, setIsGameEnded] = useState(false);
 	const [isDraw, setIsDraw] = useState(false);
 	const [field, setField] = useState(createField());
+	// -----------------------------------------------------
 
-	const checkForWin = (fieldGame, pattern, player) =>
-		pattern.some((pArr) => pArr.every((index) => fieldGame[index] === player));
+	const { dispatch, getState } = store;
+	const { currentPlayerFromStore } = getState();
 
 	const restartGame = () => {
 		setField(createField());
 		setIsGameEnded(false);
 		setIsDraw(false);
-		setCurrentPlayer('X');
+		dispatch({
+			type: 'SET_CURRENT_PLAYER',
+			payload: { currentPlayerFromStore: 'X' },
+		});
 	};
 
 	const stepInGame = (i) => {
 		if (field[i] !== '' || isGameEnded || isDraw) return;
-		const newField = [...field.slice(0, i), currentPlayer, ...field.slice(i + 1)];
-		if (checkForWin(newField, WIN_PATTERNS, currentPlayer)) {
+		const newField = [...field.slice(0, i), currentPlayerFromStore, ...field.slice(i + 1)];
+		if (checkWin(newField, currentPlayerFromStore)) {
 			setIsGameEnded(true);
 			setField([...newField]);
 			return;
@@ -32,15 +39,23 @@ export function Game() {
 			setIsDraw(true);
 			return;
 		}
-		setCurrentPlayer(currentPlayer === 'X' ? 'O' : 'X');
+
+		dispatch({
+			type: 'SET_CURRENT_PLAYER',
+			payload: { currentPlayerFromPayload: currentPlayerFromStore },
+		});
 		setField([...newField]);
 	};
-
+	useEffect(() => {
+		const unsubscribe = store.subscribe(() => {
+			forceUpdate({});
+		});
+		return unsubscribe;
+	}, []);
 	return (
 		<GameLayout
 			isGameEnded={isGameEnded}
 			isDraw={isDraw}
-			currentPlayer={currentPlayer}
 			field={field}
 			stepInGame={stepInGame}
 			restartGame={restartGame}

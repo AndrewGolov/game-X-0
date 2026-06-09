@@ -24,30 +24,12 @@ export function Game() {
 	const stepInGame = (i) => {
 		if (field[i] !== '' || isGameEnded || isDraw) return;
 		const newField = [...field.slice(0, i), currentPlayer, ...field.slice(i + 1)];
-		if (checkWin(newField, currentPlayer)) {
-			dispatch({ type: 'SET_IS_GAME_ENDED', payload: true });
-			return;
-		}
+		if (checkWin(newField, currentPlayer)) return dispatch({ type: 'SET_IS_GAME_ENDED', payload: true });
+
 		dispatch({
 			type: 'STEP_IN_GAME',
 			payload: newField,
 		});
-
-		// 	dispatch({ type: 'SET_IS_GAME_ENDED', payload: { isGameEnded: true } });
-		// 	dispatch({ type: 'SET_FIELD', payload: { field: [...newField] } });
-		// 	return;
-		// }
-		// if (!newField.includes('') && !isGameEnded) {
-		// 	dispatch({ type: 'SET_FIELD', payload: { field: [...newField] } });
-		// 	// setIsDraw(true); изменение состояния ничья
-		// 	return;
-		// }
-
-		// dispatch({
-		// 	type: 'SET_CURRENT_PLAYER',
-		// 	payload: { currentPlayerFromPayload: currentPlayerFromStore },
-		// });
-		// dispatch({ type: 'SET_FIELD', payload: { field: [...newField] } });
 	};
 	useEffect(() => {
 		const unsubscribe = store.subscribe(() => {

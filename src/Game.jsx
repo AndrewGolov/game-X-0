@@ -7,36 +7,29 @@ import { checkWin } from './components/utils/checkWin';
 export function Game() {
 	const [, forceUpdate] = useState({});
 
-	// Временная логика которая убереться
-	const [isGameEnded, setIsGameEnded] = useState(false);
-	const [isDraw, setIsDraw] = useState(false);
+	// Временная логика которая уберется
+
 	const [field, setField] = useState(createField());
 	// -----------------------------------------------------
 
 	const { dispatch, getState } = store;
-	const { currentPlayerFromStore } = getState();
+	const { currentPlayerFromStore, isDraw, isGameEnded } = getState();
 
 	const restartGame = () => {
-		setField(createField());
-		setIsGameEnded(false);
-		setIsDraw(false);
-		dispatch({
-			type: 'SET_CURRENT_PLAYER',
-			payload: { currentPlayerFromStore: 'X' },
-		});
+		dispatch({ type: 'RESET_GAME' });
 	};
 
 	const stepInGame = (i) => {
 		if (field[i] !== '' || isGameEnded || isDraw) return;
 		const newField = [...field.slice(0, i), currentPlayerFromStore, ...field.slice(i + 1)];
 		if (checkWin(newField, currentPlayerFromStore)) {
-			setIsGameEnded(true);
+			dispatch({ type: 'SET_IS_GAME_ENDED', payload: { isGameEnded: true } });
 			setField([...newField]);
 			return;
 		}
 		if (!newField.includes('') && !isGameEnded) {
 			setField([...newField]);
-			setIsDraw(true);
+			// setIsDraw(true); изменение состояния ничья
 			return;
 		}
 
@@ -52,13 +45,5 @@ export function Game() {
 		});
 		return unsubscribe;
 	}, []);
-	return (
-		<GameLayout
-			isGameEnded={isGameEnded}
-			isDraw={isDraw}
-			field={field}
-			stepInGame={stepInGame}
-			restartGame={restartGame}
-		/>
-	);
+	return <GameLayout field={field} stepInGame={stepInGame} restartGame={restartGame} />;
 }

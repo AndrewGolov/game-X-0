@@ -1,3 +1,6 @@
+import { checkWin } from './utils/checkWin';
+import { checkIsDraw } from './utils/checkIsDraw';
+
 const initialState = {
 	field: ['', '', '', '', '', '', '', '', ''],
 	currentPlayer: 'X',
@@ -8,16 +11,22 @@ const initialState = {
 export const gameReducer = (state = initialState, { type, payload }) => {
 	switch (type) {
 		case 'STEP_IN_GAME':
+			const newField = [...state.field.slice(0, payload), state.currentPlayer, ...state.field.slice(payload + 1)];
 			const stepPlayer = state.currentPlayer === 'X' ? 'O' : 'X';
+			console.log(stepPlayer);
 
-			return {
-				field: payload,
-				currentPlayer: stepPlayer,
-			};
-		case 'SET_IS_GAME_ENDED':
+			if (checkWin(newField, state.currentPlayer)) {
+				return {
+					...state,
+					field: newField,
+					isGameEnded: true,
+				};
+			}
+			if (checkIsDraw(newField)) return { ...state, field: newField, isDraw: true };
 			return {
 				...state,
-				isGameEnded: payload,
+				field: newField,
+				currentPlayer: stepPlayer,
 			};
 
 		case 'RESET_GAME':

@@ -21,7 +21,7 @@ export const GameLayout = ({ stepInGame }) => {
 		<div className={styles.gameContainer}>
 			<h1 className={styles.gameTitle}>Игра крестики нолики </h1>
 			<InformationLayout />
-			<FieldLayout onCellClick={stepInGame} />
+			<FieldLayout />
 
 			<button className={styles.gameRestartBtn} onClick={restartGame}>
 				Начать заново

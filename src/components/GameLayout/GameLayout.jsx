@@ -1,20 +1,14 @@
 import { FieldLayout } from '../Field/FieldLayout';
 import { InformationLayout } from '../Information/InformationLayout';
 import styles from './GameLayout.module.css';
-import { store } from '../store';
+import { useDispatch } from 'react-redux';
 
 export const GameLayout = () => {
-	const { dispatch } = store;
+	const dispatch = useDispatch();
 
 	const restartGame = () => {
 		dispatch({
 			type: 'RESET_GAME',
-			payload: {
-				field: ['', '', '', '', '', '', '', '', ''],
-				currentPlayer: 'X',
-				isGameEnded: false,
-				isDraw: false,
-			},
 		});
 	};
 	return (

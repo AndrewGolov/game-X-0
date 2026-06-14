@@ -13,7 +13,6 @@ export const gameReducer = (state = initialState, { type, payload }) => {
 		case 'STEP_IN_GAME':
 			const newField = [...state.field.slice(0, payload), state.currentPlayer, ...state.field.slice(payload + 1)];
 			const stepPlayer = state.currentPlayer === 'X' ? 'O' : 'X';
-			console.log(stepPlayer);
 
 			if (checkWin(newField, state.currentPlayer)) {
 				return {
@@ -31,8 +30,7 @@ export const gameReducer = (state = initialState, { type, payload }) => {
 
 		case 'RESET_GAME':
 			return {
-				...state,
-				...payload,
+				...initialState,
 			};
 
 		default:

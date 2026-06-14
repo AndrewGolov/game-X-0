@@ -3,18 +3,12 @@ import { InformationLayout } from '../Information/InformationLayout';
 import styles from './GameLayout.module.css';
 import { useDispatch } from 'react-redux';
 
-export const GameLayout = ({ stepInGame }) => {
+export const GameLayout = () => {
 	const dispatch = useDispatch();
 
 	const restartGame = () => {
 		dispatch({
 			type: 'RESET_GAME',
-			payload: {
-				field: ['', '', '', '', '', '', '', '', ''],
-				currentPlayer: 'X',
-				isGameEnded: false,
-				isDraw: false,
-			},
 		});
 	};
 	return (

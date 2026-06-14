@@ -3,7 +3,7 @@ import { InformationLayout } from '../Information/InformationLayout';
 import styles from './GameLayout.module.css';
 import { store } from '../store';
 
-export const GameLayout = ({ stepInGame }) => {
+export const GameLayout = () => {
 	const { dispatch } = store;
 
 	const restartGame = () => {

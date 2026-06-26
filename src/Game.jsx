@@ -1,3 +1,3 @@
-import { GameLayout } from './components/GameLayout/GameLayout';
+import { GameComponent } from './components/GameLayout/GameComponent';
 
-export const Game = () => <GameLayout />;
+export const Game = () => <GameComponent />;

@@ -1,11 +1,7 @@
 import styles from './InformationLayout.module.css';
-import { useSelector } from 'react-redux';
-import { currentPlayerSelector, drawSelector, gameEndedSelector } from '../selectors';
+import { connect } from 'react-redux';
 
-export const InformationLayout = () => {
-	const currentPlayer = useSelector(currentPlayerSelector);
-	const isGameEnded = useSelector(gameEndedSelector);
-	const isDraw = useSelector(drawSelector);
+const InformationLayout = ({ currentPlayer, isGameEnded, isDraw }) => {
 	return (
 		<h2 className={styles.informatioonTitle}>
 			{isGameEnded ? (
@@ -18,3 +14,10 @@ export const InformationLayout = () => {
 		</h2>
 	);
 };
+const mapStateToProps = (state) => ({
+	currentPlayer: state.currentPlayer,
+	isGameEnded: state.isGameEnded,
+	isDraw: state.isDraw,
+});
+
+export const InformationComponent = connect(mapStateToProps)(InformationLayout);

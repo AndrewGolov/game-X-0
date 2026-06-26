@@ -1,13 +1,7 @@
 import styles from './FieldLayout.module.css';
-import { useDispatch, useSelector } from 'react-redux';
-import { fieldSelector, gameEndedSelector, drawSelector } from '../selectors';
+import { connect } from 'react-redux';
 
-export const FieldLayout = () => {
-	const dispatch = useDispatch();
-
-	const field = useSelector(fieldSelector);
-	const isGameEnded = useSelector(gameEndedSelector);
-	const isDraw = useSelector(drawSelector);
+const FieldLayout = ({ field, isGameEnded, isDraw, dispatch }) => {
 	const step = (i) => {
 		dispatch({
 			type: 'STEP_IN_GAME',
@@ -30,3 +24,11 @@ export const FieldLayout = () => {
 		</div>
 	);
 };
+
+const mapStateToProps = (state) => ({
+	field: state.field,
+	isGameEnded: state.isGameEnded,
+	isDraw: state.isDraw,
+});
+
+export const FieldComponent = connect(mapStateToProps)(FieldLayout);

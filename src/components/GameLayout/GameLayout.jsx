@@ -1,6 +1,6 @@
 import { FieldLayout } from '../Field/FieldLayout';
 import { InformationLayout } from '../Information/InformationLayout';
-import styles from './GameLayout.module.css';
+// import styles from './GameLayout.module.css';
 import { useDispatch } from 'react-redux';
 
 export const GameLayout = () => {

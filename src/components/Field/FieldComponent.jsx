@@ -3,12 +3,12 @@ import styles from './FieldLayout.module.css';
 import { connect } from 'react-redux';
 
 class FieldLayout extends Component {
-	step(i) {
+	step = (i) => {
 		this.props.dispatch({
 			type: 'STEP_IN_GAME',
 			payload: i,
 		});
-	}
+	};
 
 	render() {
 		const { field, isGameEnded, isDraw } = this.props;

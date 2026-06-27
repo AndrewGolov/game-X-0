@@ -1,7 +1,7 @@
 import styles from './FieldLayout.module.css';
 import { connect } from 'react-redux';
 
-const FieldLayout = ({ field, isGameEnded, isDraw, dispatch }) => {
+const FieldLayout = ({ dispatch, field, isGameEnded, isDraw }) => {
 	const step = (i) => {
 		dispatch({
 			type: 'STEP_IN_GAME',
@@ -15,7 +15,7 @@ const FieldLayout = ({ field, isGameEnded, isDraw, dispatch }) => {
 				<button
 					className={styles.fieldItem}
 					key={i}
-					onClick={step.bind(null, i)}
+					onClick={() => step(i)}
 					disabled={isGameEnded || isDraw || value !== ''}
 				>
 					{value}

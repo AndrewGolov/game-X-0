@@ -1,5 +1,4 @@
 import { Component } from 'react';
-import styles from './FieldLayout.module.css';
 import { connect } from 'react-redux';
 
 class FieldLayout extends Component {
@@ -13,10 +12,10 @@ class FieldLayout extends Component {
 	render() {
 		const { field, isGameEnded, isDraw } = this.props;
 		return (
-			<div className={styles.field}>
+			<div className="grid grid-cols-[repeat(3,100px)] grid-rows-[repeat(3,100px)] gap-2 p-[7px]">
 				{field.map((value, i) => (
 					<button
-						className={styles.fieldItem}
+						className="w-full h-full text-2xl m-1 rounded-lg bg-gray-300 hover:bg-white cursor-pointer"
 						key={i}
 						onClick={() => this.step(i)}
 						disabled={isGameEnded || isDraw || value !== ''}

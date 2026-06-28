@@ -1,15 +1,14 @@
 import { Component } from 'react';
-import styles from './InformationLayout.module.css';
 import { connect } from 'react-redux';
 
 class InformationLayout extends Component {
 	render() {
 		return (
-			<h2 className={styles.informatioonTitle}>
+			<h2 className="p-10 text-white">
 				{this.props.isGameEnded ? (
-					<span className={styles.green}>Победитель: {this.props.currentPlayer}</span>
+					<span className="green">Победитель: {this.props.currentPlayer}</span>
 				) : this.props.isDraw ? (
-					<span className={styles.yellow}>Победила ничья</span>
+					<span className="yellow">Победила ничья</span>
 				) : (
 					<span>Ход игрока: {this.props.currentPlayer}</span>
 				)}
